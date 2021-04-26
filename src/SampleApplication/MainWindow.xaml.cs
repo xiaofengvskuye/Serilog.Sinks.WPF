@@ -10,21 +10,26 @@ namespace SampleApplication
     /// </summary>
     public partial class MainWindow : Window
     {
+        readonly LoggerConfiguration LogCtl = null;
         public MainWindow()
         {
             InitializeComponent();
-
-            Log.Logger = new LoggerConfiguration()
-                        .WriteToSimpleTextBox()
-                        .CreateLogger();
+            LogCtl = new LoggerConfiguration();
+            Log.Logger = LogCtl.WriteToSimpleTextBox().CreateLogger();
 
             Log.Information("Logger has been created");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            
             Log.Information(inputTxt.Text);
-            inputTxt.Text = string.Empty;
+            //inputTxt.Text = string.Empty;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            LogCtl.LoggerClear();
         }
     }
 }

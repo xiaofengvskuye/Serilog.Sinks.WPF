@@ -46,6 +46,25 @@ namespace Serilog.Sinks.WPF
             }
 
             WindFormsSink.JsonTextBoxSink.OnLogReceived += JsonTextBoxSink_OnLogReceived;
+            WindFormsSink.JsonTextBoxSink.OnLogClear += JsonTextBoxSink_OnLogClear;
+        }
+
+        private void JsonTextBoxSink_OnLogClear()
+        {
+            if (LogTextBox.Dispatcher.Thread == Thread.CurrentThread)
+            {
+                LogTextBox.Clear() ;
+            }
+            else
+            {
+                LogTextBox.Dispatcher.BeginInvoke(
+                    System.Windows.Threading.DispatcherPriority.Normal,
+                    new Action(
+                        delegate
+                        {
+                            LogTextBox.Clear();
+                        }));
+            }
         }
 
         private void JsonTextBoxSink_OnLogReceived(string str)

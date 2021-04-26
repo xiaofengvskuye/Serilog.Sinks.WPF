@@ -12,10 +12,10 @@ namespace Serilog.Sinks.WPF
     public class WinFormsSinkInternal : ILogEventSink
     {
         public delegate void LogHandler (string str);
-        
+        public delegate void LogClear();
         public event LogHandler OnLogReceived;
-
-        private ITextFormatter _textFormatter;
+        public event LogClear OnLogClear;
+        private readonly ITextFormatter _textFormatter;
 
         public WinFormsSinkInternal(ITextFormatter textFormatter)
         {
@@ -30,6 +30,10 @@ namespace Serilog.Sinks.WPF
             FireEvent(renderSpace.ToString());
         }
 
+        public void Clear()
+        {
+            OnLogClear?.Invoke();
+        }
         private void FireEvent (string str)
         {
             OnLogReceived?.Invoke(str + Environment.NewLine);

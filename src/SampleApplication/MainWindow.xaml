@@ -16,6 +16,7 @@
         <WPF:SimpleLogTextBox HorizontalAlignment="Left" Height="309" Margin="10,92,0,0" VerticalAlignment="Top" Width="772" IsReadyOnly="True" ScrollBarVisibility="Auto" Grid.ColumnSpan="2"/>
         <TextBox x:Name="inputTxt" HorizontalAlignment="Left" Height="23" Margin="10,22,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="351" Grid.ColumnSpan="2"/>
         <Button Content="Add Log" HorizontalAlignment="Left" Margin="146.969,22,0,0" VerticalAlignment="Top" Width="113" Height="23" Click="Button_Click" Grid.Column="1"/>
+        <Button Content="Clear Log" HorizontalAlignment="Left" Margin="300.969,22,0,0" VerticalAlignment="Top" Width="113" Height="23" Click="Button_Click_1" Grid.Column="1"/>
 
     </Grid>
 </Window>

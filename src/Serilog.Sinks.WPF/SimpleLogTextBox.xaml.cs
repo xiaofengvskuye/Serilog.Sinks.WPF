@@ -47,6 +47,25 @@ namespace Serilog.Sinks.WPF
             }
 
             WindFormsSink.SimpleTextBoxSink.OnLogReceived += SimpleTextBoxSink_OnLogReceived;
+            WindFormsSink.SimpleTextBoxSink.OnLogClear += SimpleTextBoxSink_OnLogClear;
+        }
+
+        private void SimpleTextBoxSink_OnLogClear()
+        {
+            if (LogTextBox.Dispatcher.Thread == Thread.CurrentThread)
+            {
+                LogTextBox.Clear();
+            }
+            else
+            {
+                LogTextBox.Dispatcher.BeginInvoke(
+                    System.Windows.Threading.DispatcherPriority.Normal,
+                    new Action(
+                        delegate
+                        {
+                            LogTextBox.Clear();
+                        }));
+            }
         }
 
         private void SimpleTextBoxSink_OnLogReceived(string str)
